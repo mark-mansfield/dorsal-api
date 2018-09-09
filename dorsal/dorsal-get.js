@@ -22,7 +22,7 @@ const countries = {
         data.forEach( (item) => {
             let div = document.createElement('div')
             div.setAttribute('id' , item.name)
-            div.setAttribute('class' , 'button')
+            div.setAttribute('class' , 'button hvr-ripple-out')
             div.setAttribute('value' , item.name)
             div.textContent = item.name
             div.addEventListener('click' , (e) => {

@@ -34,15 +34,8 @@ body {
 }
 
 
-.main__display-container {
-
-    height: 300px;
-    width: 200px;
-    padding: 20px;
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.main__display-container > .sidebar{
+    display: none;
 
 }
 
@@ -55,7 +48,7 @@ body {
 .button {
     margin: 20px auto;
     padding: 20px;
-    width: 10vw;
+    width: 350px;
     background: rgba(30, 143, 255, 0.618);
     color: white;
 }
@@ -89,3 +82,61 @@ body {
     font-size: 0.7rem;
 }
 
+
+@media (min-width: 40rem) {
+
+    .header {
+        display: flex;
+        justify-content: flex-start;
+        z-index: 3;
+        width: 100%;
+        height: 100px;
+    }
+
+    .header > .app-name {
+        margin: 20px;
+        color: white;
+        flex: 2;
+    }
+
+    .main__display-container{
+        height: 300px;
+        width: 100vw;
+        padding: 20px;
+        display: flex;
+        justify-content: start;
+    }
+
+    .main__display-container > .sidebar {
+        display: flex;
+        flex-direction: column;
+        justify-content :start;
+        align-content: center;
+        margin-left: 50px;
+    }
+
+    .main__display-container > .main__content-panel {
+        flex: 2;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main__display-container >  .main__content-panel-list-data {
+
+        background: rgba(80, 80, 80, 0.8);
+        width : 50%;
+        height: 50vh;
+    }
+    .button {
+        margin: 5px  auto;
+        padding: 20px;
+        width: 180px;
+        background: rgba(30, 143, 255, 0.618);
+        color: white;
+    }
+
+
+
+}
