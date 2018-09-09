@@ -1,0 +1,25 @@
+{
+    "error": null,
+    "responseData": [{
+        "id": 1,
+        "name": "Australia",
+        "image": "1238",
+        "lengthMetric": "m",
+        "distanceMetric": "m",
+        "coverImage": null
+    }, {
+        "id": 2,
+        "name": "Hawaii",
+        "image": "1255",
+        "lengthMetric": "f",
+        "distanceMetric": "y",
+        "coverImage": null
+    }, {
+        "id": 3,
+        "name": "USA",
+        "image": "1256",
+        "lengthMetric": "f",
+        "distanceMetric": "y",
+        "coverImage": null
+    }]
+}

@@ -1,0 +1,240 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Dorsal - Community Based Shark Alert App</title>
+    <meta name="description" content="Dorsal - Community Based Shark Alert App">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+
+    <style type="text/css">
+        body {
+            background-color: #16191e;
+            color: #fff;
+            font-size: 0.875em;
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+        }
+
+        .main {
+            max-width: 800px;
+            margin: auto;
+            padding: 1em;
+            text-align: center;
+        }
+
+        select {
+            font-size: 1em;
+            padding: 6px 15px;
+            background-color: #009aff;
+            border: none;
+            color: #fff;
+            margin: 0 1%;
+            width: 22%;
+        }
+
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        ul li {
+            border-top: 1px solid #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main">
+        <select id="select-country">
+            <option selected disabled style="display:none">Country</option>
+        </select>
+        <select id="select-state">
+            <option selected disabled style="display:none">State</option>
+        </select>
+        <select id="select-zone">
+            <option selected disabled style="display:none">Zone</option>
+        </select>
+        <select id="select-location">
+            <option selected disabled style="display:none">Location</option>
+        </select>
+
+        <div class="surfspot-list">
+            <ul></ul>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        var config = {
+            apiUrl: 'http://api.dorsalwatch.com/public',
+            publicKey: 'ab61cd9427bea80f22e641c04c312195',
+            contentType: 'application/json'
+        }
+
+        var url = config.apiUrl + '/countries';
+        $.ajax({
+            url: url,
+            contentType: config.contentType,
+            type: 'GET',
+            success: function (result) {
+                //append options to Select Country dropdown after getting result
+                if (result.responseData) {
+                    var countriesList = result.responseData;
+                    for (var i = 0; i < countriesList.length; i++) {
+                        var widget = '<option value="' + countriesList[i].name + '">' + countriesList[i].name +
+                            '</option>';
+                        $(widget).appendTo('#select-country');
+                    }
+                }
+            }
+        });
+
+        //Get List Of Countries
+        $('#select-country').on('change', function () {
+            var country = $(this).val();
+            console.log(country)
+            var url = config.apiUrl + '/' + country + '/states';
+
+            $.ajax({
+                url: url,
+                contentType: config.contentType,
+                type: 'GET',
+                success: function (result) {
+                    //reset the initial state of dropdowns
+                    resetStateDropdown();
+                    resetZoneDropdown();
+                    resetLocationDropdown();
+                    //append options to Select Zone dropdown after getting result
+                    if (result.responseData) {
+                        var statesList = result.responseData;
+                        for (var i = 0; i < statesList.length; i++) {
+                            var widget = '<option value="' + statesList[i].name + '">' + statesList[
+                                i].name + '</option>';
+                            $(widget).appendTo('#select-state');
+                        }
+                    }
+                }
+            });
+        });
+
+        $('#select-state').on('change', function () {
+            var country = $('#select-country').val();
+            var state = $(this).val();
+            var url = config.apiUrl + '/surfspot/zone/' + country + '/' + state + '/' + config.publicKey;
+
+            $.ajax({
+                url: url,
+                contentType: config.contentType,
+                type: 'GET',
+                success: function (result) {
+                    //reset the initial state of dropdowns
+                    resetZoneDropdown();
+                    resetLocationDropdown();
+                    //append options to Select Zone dropdown after getting result
+                    if (result.responseData) {
+                        var zoneList = result.responseData;
+                        for (var i = 0; i < zoneList.length; i++) {
+                            var widget = '<option value="' + zoneList[i] + '">' + zoneList[i] +
+                                '</option>';
+                            $(widget).appendTo('#select-zone');
+                        }
+                    }
+                }
+            });
+        });
+
+        $('#select-zone').on('change', function () {
+            var country = $('#select-country').val();
+            var state = $('#select-state').val();
+            var zone = $(this).val();
+            var url = config.apiUrl + '/surfspot/location/' + country + '/' + state + '/' + zone + '/' + config
+                .publicKey;
+            console.log(url)
+            $.ajax({
+                url: url,
+                contentType: config.contentType,
+                type: 'GET',
+                success: function (result) {
+                    //reset the initial state of dropdowns
+                    resetLocationDropdown();
+                    //append options to Select Location dropdown after getting result
+                    if (result.responseData) {
+                        var locationList = result.responseData;
+                        for (var i = 0; i < locationList.length; i++) {
+                            var widget = '<option value="' + locationList[i] + '">' + locationList[
+                                i] + '</option>';
+                            $(widget).appendTo('#select-location');
+                        }
+                    }
+                }
+            });
+        });
+
+        $('#select-location').on('change', function () {
+            var location = $(this).val();
+            var url = config.apiUrl + '/report/list';
+
+            var request = {};
+            request.state = $('#select-state').val();
+            request.zone = $('#select-zone').val();
+            request.location = $('#select-location').val();
+            request.publicKey = config.publicKey;
+            request.pageSize = 20; //items return per call
+            request.pageIndex = 0; //page index
+
+            $.ajax({
+                url: url,
+                contentType: config.contentType,
+                type: 'POST',
+                data: JSON.stringify(request),
+                success: function (result) {
+                    if (result.responseData.length > 0) {
+                        $('.surfspot-list ul').html('');
+                        populateReportList(result.responseData);
+                    } else {
+                        $('.surfspot-list ul').html('There is no result');
+                    }
+                }
+            });
+        });
+
+        var populateReportList = function (reportList) {
+            console.log(reportList)
+            for (var i = 0; i < reportList.length; i++) {
+                var report = reportList[i];
+                var widget = '';
+                widget += '<li>';
+                widget += '<div class="shark-info">';
+                widget += '<p class="shark-name">Shark Type: ' + report.typeOfShark + '</p>';
+                widget += '<p class="shark-location">Location: ' + report.state + ' - ' + report.zone + ' - ' +
+                    report.location + '</p>';
+                widget += '<p class="shark-report-date">Report Time: ' + moment.unix(report.reportTime / 1000).format(
+                    "HH:mm DD/MM/YYYY") + '</p>';
+                widget += '<p class="shark-length">Length: ' + report.sharkLength + 'm length</p>';
+                widget += '</div>';
+                widget += '</li>';
+                $(widget).appendTo('.surfspot-list ul');
+            }
+        };
+
+        var resetStateDropdown = function () {
+            $('#select-state').html('<option selected disabled style="display:none">State</option>');
+        };
+
+        var resetZoneDropdown = function () {
+            $('#select-zone').html('<option selected disabled style="display:none">Zone</option>');
+        };
+
+        var resetLocationDropdown = function () {
+            $('#select-location').html('<option selected disabled style="display:none">Location</option>');
+        };
+    </script>
+
+</body>
+
+</html>
