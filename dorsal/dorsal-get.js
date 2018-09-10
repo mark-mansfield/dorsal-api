@@ -4,21 +4,18 @@
 const config = {
     apiUrl : 'http://api.dorsalwatch.com/public',
     publicKey : 'ab61cd9427bea80f22e641c04c312195',
-    contentType : 'application/json'
+    contentType : 'application/json',
+    appName : 'SHARK DATA 1.0'
 
 }
-
 
 
 // list of countries
 const countries = {
     country: "",
-    renderCountriesList : function (responseTxt)  {
-
+    renderCountriesList : function ()  {
         const data = this.response.responseData
         const targetContainer = document.querySelector(".sidebar")
-
-
         data.forEach( (item) => {
             let div = document.createElement('div')
             div.setAttribute('id' , item.name)
@@ -30,11 +27,20 @@ const countries = {
             })
             targetContainer.appendChild(div)
         })
-
-        // // console.log(this.response.responseData)
     },
     getCountriesData : function (country)  {
-        localStorage.setItem('shark-data' ,JSON.stringify([{'country' : country}]))
+        localStorage.setItem
+        ('shark-data', JSON.stringify
+            (
+                [
+                    {
+                        'country' : country,
+                        'zone' : '',
+                        'locations' : []
+                    }
+                ]
+            )
+        )
         this.country = country
         const http = new XMLHttpRequest();
         http.open("GET", config.apiUrl + '/countries');
@@ -79,7 +85,7 @@ const states = {
             div.setAttribute('value' , item.name)
             div.textContent = item.name
             div.addEventListener('click' , (e) => {
-                console.log(item.name)
+                zones.getZonesData(item.name)
             })
             liveData.appendChild(div)
             targetContainer.appendChild(liveData)
@@ -87,7 +93,12 @@ const states = {
         // console.log(this.response.responseData)
     },
     getStatesData : function (country)  {
-        localStorage.setItem('shark-data' ,JSON.stringify([{'country' : country}]))
+        localStorage.setItem('shark-data' ,JSON.stringify([
+            {
+                'country' : country,
+                'zone' : '',
+                'locations' : []
+            }]))
         const http = new XMLHttpRequest();
         http.open("GET", config.apiUrl + '/' + country +  '/states');
         http.responseType = "json"
@@ -106,24 +117,32 @@ const zones = {
     zone: "",
     renderZonesList : function (responseTxt)  {
         const data = this.response.responseData
-        // console.log(data)
+        console.log(data)
         // console.log('Surfing Zones:::::::')
         data.forEach( (item) => {
-            // console.log(item)
+
         })
     },
     getZonesData : function (value)  {
-        this.zone = value
-        const http = new XMLHttpRequest();
 
-        http.open("GET", config.apiUrl + '/surfspot/zone/Australia/' + this.zone + '/' + config.publicKey);
-        http.responseType = "json"
-        http.addEventListener("load", this.renderZonesList);
-        // http.addEventListener("progress", updateProgress)
-        // http.addEventListener("error", transferFailed)
-        // http.addEventListener("abort", transferCancelled)
-        http.send()
+        const sharkData = JSON.parse(localStorage.getItem('shark-data'))
+        if (sharkData) {
 
+            this.zone = value
+            let country =  sharkData[0].country
+            const http = new XMLHttpRequest();
+            http.open("GET", config.apiUrl + '/surfspot/zone/' + country + '/' + this.zone + '/' + config.publicKey);
+            http.responseType = "json"
+            http.addEventListener("load", this.renderZonesList);
+            // http.addEventListener("progress", updateProgress)
+            // http.addEventListener("error", transferFailed)
+            // http.addEventListener("abort", transferCancelled)
+            http.send()
+
+        } else {
+            console.log('PLease Select a Country')
+            return
+        }
     }
 
 }
@@ -153,9 +172,24 @@ const locations = {
 
 }
 
-
-//   var url = config.apiUrl + '/surfspot/zone/' + country + '/' + state + '/' + config.publicKey;
-countries.getCountriesData()
+const setUp = () => {
+    localStorage.setItem
+    ('shark-data', JSON.stringify
+        (
+            [
+                {
+                    'country' : '',
+                    'zone' : '',
+                    'locations' : []
+                }
+            ]
+        )
+    )
+    countries.getCountriesData('Australia')
+    const appName = document.querySelector('.app-name')
+    appName.textContent = config.appName
+}
+setUp()
 
 // use the country name as an input for now
 // states.getStatesData('Australia')
