@@ -26,7 +26,7 @@ const countries = {
             div.setAttribute('value' , item.name)
             div.textContent = item.name
             div.addEventListener('click' , (e) => {
-                console.log(item.name)
+                states.getStatesData(item.name)
             })
             targetContainer.appendChild(div)
         })
@@ -34,6 +34,7 @@ const countries = {
         // // console.log(this.response.responseData)
     },
     getCountriesData : function (country)  {
+        localStorage.setItem('shark-data' ,JSON.stringify([{'country' : country}]))
         this.country = country
         const http = new XMLHttpRequest();
         http.open("GET", config.apiUrl + '/countries');
@@ -52,14 +53,41 @@ const countries = {
 const states = {
 
     renderStatesList : function (responseTxt)  {
-        const data = this.response.responseData
+
         // console.log('States By Country:::::::')
+        const data = this.response.responseData
+        const targetContainer = document.querySelector(".main__content-panel-list-data")
+        const currentData =  document.querySelector(".live-data")
+
+        if (currentData) {
+            targetContainer.removeChild(currentData)
+        }
+
+        const liveData = document.createElement('div')
+        liveData.setAttribute('class', 'live-data')
+        targetContainer.appendChild(liveData)
+
+        const title = document.querySelector(".main__content-panel-title")
+        const sharkData = JSON.parse(localStorage.getItem('shark-data'))
+
+        title.textContent = "Reporting Zones in " + sharkData[0].country
+        targetContainer.appendChild(title)
         data.forEach( (item) => {
-            // console.log(item)
+            let div = document.createElement('div')
+            div.setAttribute('id' , item.name)
+            div.setAttribute('class' , 'button hvr-ripple-out')
+            div.setAttribute('value' , item.name)
+            div.textContent = item.name
+            div.addEventListener('click' , (e) => {
+                console.log(item.name)
+            })
+            liveData.appendChild(div)
+            targetContainer.appendChild(liveData)
         })
         // console.log(this.response.responseData)
     },
     getStatesData : function (country)  {
+        localStorage.setItem('shark-data' ,JSON.stringify([{'country' : country}]))
         const http = new XMLHttpRequest();
         http.open("GET", config.apiUrl + '/' + country +  '/states');
         http.responseType = "json"
@@ -130,6 +158,6 @@ const locations = {
 countries.getCountriesData()
 
 // use the country name as an input for now
-states.getStatesData('Australia')
-zones.getZonesData('NSW')
-locations.getLocationsData('Sydney')
+// states.getStatesData('Australia')
+// zones.getZonesData('NSW')
+// locations.getLocationsData('Sydney')

@@ -135,8 +135,18 @@ body {
         width: 180px;
         background: rgba(30, 143, 255, 0.618);
         color: white;
+        cursor: pointer;
+    }
+    .button:hover {
+
+        cursor: pointer;
     }
 
+    .button[disabled]{
+        color: rgba(30, 143, 255, 0.8);
+        background: rgba(30, 143, 255, 0.1);
+        cursor: default;
+    }
 
 
 }
