@@ -30,7 +30,7 @@ I grafted this because I didnt want the rest of the library or to need a node_mo
 }
 
 .hvr-ripple-out {
-    display: inline-block;
+    display: block;
     vertical-align: middle;
     -webkit-transform: perspective(1px) translateZ(0);
     transform: perspective(1px) translateZ(0);
