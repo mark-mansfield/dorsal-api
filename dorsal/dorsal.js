@@ -45,8 +45,11 @@ const countries = {
             mobileNavListItem.addEventListener('click' , (e) => {
                 countries.setCountry(item.name)
                 states.getStatesData(item.name)
+                const mobileNav = document.querySelector('.mobile-nav');
+                const backdrop = document.querySelector('.click-area');
                 mobileNav.classList.remove('show-element');
-                show-elementst.remove('show-element');
+                backdrop.classList.remove('show-element');
+
             })
 
             mobileNavList.appendChild(mobileNavListItem)
@@ -299,11 +302,22 @@ const locations = {
         const liveData = document.createElement('div')
         liveData.setAttribute('class', 'live-data')
 
+        const backButton = document.createElement('button')
+        backButton.setAttribute('class' ,'button green')
+
+        backButton.addEventListener('click' , () => {
+
+            // functionality hook
+            navObject.locationsView(sharkData[0].zone)
+        })
+
+
         const title = document.createElement('h1')
         title.setAttribute('class', 'title')
 
         title.textContent = "Reports for " + sharkData[0].location + ' / '+ sharkData[0].country
         liveData.appendChild(title)
+        liveData.appendChild(backButton)
         targetContainer.appendChild(liveData)
 
         // const report = {
