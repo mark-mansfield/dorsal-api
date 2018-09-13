@@ -217,9 +217,6 @@ body {
 
 
 
-.main__content > .mobile-content {
-    display: block;
-}
 
 .main__content-panel {
     display: flex;

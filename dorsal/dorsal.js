@@ -18,7 +18,7 @@ const countries = {
         const data = this.response.responseData
         const targetContainer = document.querySelector('.sidebar')
         const mobileNavContainer = document.querySelector('.mobile-nav')
-        const mobileContentContainer = document.querySelector('.mobile-content')
+
         const mobileNavList = document.createElement('ul')
         const mobileNavTitle = document.createElement('h1')
 
