@@ -44,7 +44,7 @@ body {
     position: fixed;
     top: 0px;
     left: 0px;
-    z-index: 1;
+    z-index: 3;
     width: inherit;
     height: inherit;
     background: rgba(0,0,0,0.5);
@@ -232,8 +232,23 @@ body {
     color: white;
 }
 
+.main__content-panel  > .live-data > .icon-large {
+    font-size: 2rem;
+    color: dodgerblue;
+}
+
+.main__content-panel  > .live-data > .icon-large:hover {
+
+    color: white;
+}
+
+.main__content-panel > .live-data > .report-container {
+    background-color: rgba(0,0,0,0.2);
+}
+
 .main__content-panel > .live-data {
-    width : 98%
+    width : 98%;
+    text-align: center;
 }
 
 .main__content-panel > .live-data > .report-container {
@@ -341,6 +356,10 @@ h1 {
         display: block;
     }
 
+    .mobile-nav {
+        width: 20%;
+    }
+
     .main__content{
         height: 300px;
         width: 100vw;
@@ -380,14 +399,7 @@ h1 {
         color: dodgerblue;
     }
 
-    .main__content-panel  > .live-data > .icon-large:hover {
-        font-size: 2rem;
-        color: white;
-    }
 
-    .main__content-panel > .live-data > .report-container {
-        background-color: rgba(0,0,0,0.2);
-    }
 
     .button {
         margin: 10px  auto;

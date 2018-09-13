@@ -238,9 +238,9 @@ const locations = {
             // functionality hook
             navObject.zonesView()
         })
-
-        liveData.appendChild(title)
         liveData.appendChild(backButton)
+        liveData.appendChild(title)
+
         targetContainer.appendChild(liveData)
 
         data.forEach( (item) => {
