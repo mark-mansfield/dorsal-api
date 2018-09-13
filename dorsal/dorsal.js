@@ -16,6 +16,8 @@ const countries = {
     renderCountriesList : function ()  {
 
         const data = this.response.responseData
+        const hamburgerButton = document.querySelector('.toggle-button');
+        hamburgerButton.classList.add('show-element')
         const targetContainer = document.querySelector('.sidebar')
         const mobileNavContainer = document.querySelector('.mobile-nav')
 

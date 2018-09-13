@@ -30,8 +30,9 @@ const setUp = () => {
         countries.getCountriesData('Australia')
     }
 
-
     const hamburgerButton = document.querySelector('.toggle-button');
+    hamburgerButton.addEventListener('click' , showMobilNav );
+
     const welcomeMessage = document.querySelector('.main__welcome-message')
     const appContent = document.querySelector('.main__content')
 
@@ -39,7 +40,7 @@ const setUp = () => {
     welcomeMessage.classList.add('hide-element')
 
 
-    hamburgerButton.addEventListener('click' , showMobilNav );
+
     const appName = document.querySelector('.app-name')
     appName.textContent = config.appName
 }

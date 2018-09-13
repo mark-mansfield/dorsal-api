@@ -68,6 +68,7 @@ body {
 }
 
 .toggle-button {
+    display: none;
     width: 2rem;
     background: transparent;
     border: none;
