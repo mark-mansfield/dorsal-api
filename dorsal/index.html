@@ -11,19 +11,46 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="app.css">
         <link href="./efx.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <body>
-            <div class="overlay"></div>
-            <header class="header">
-                <div class="app-name"></div>
-                <div><img src="./assets/animals-shark-icon-1.png" class="icon-medium"></div>
-            </header>
+            <div class="backdrop"></div>
+            <div class="click-area"></div>
+            <header class="main__header">
+                <button class="fas fa-arrow-left back-button"></button>
+                    <button class="toggle-button">
+                        <span class="toggle-button__bar"></span>
+                        <span class="toggle-button__bar"></span>
+                        <span class="toggle-button__bar"></span>
+                    </button>
+                    <div class="main-header__brand app-name"></div>
+                <nav class="main-nav">
+                    <ul class="main-nav__items">
+                        <li class="main-nav__item main-nav__item--cta">
+                            <img src="./assets/animals-shark-icon-1.png" class="icon-medium">
+                        </li>
+                    </ul>
+                </nav>
+                <nav class="mobile-nav">
 
-            <main class="main__display-container" >
-                <section class="sidebar"></section>
-                <section class="main__content-panel">
-                    <h1 class="main__content-panel-title"></h1>
-                    <div class="main__content-panel-list-data"></div>
-                </section>
+                </nav>
+            </header>
+            <main class="main__display-container">
+                <div class="main__welcome-message">
+                    <h1>Welcome</h1>
+                    <div>
+                        click to get started
+                    </div>
+                    <div class="far fa-arrow-alt-circle-right icon-large start"></div>
+                </div>
+
+                <div class="main__content hide-element">
+                    <section class="mobile-content"></section>
+                    <section class="sidebar"></section>
+                    <section class="main__content-panel">
+
+                    </section>
+                </div>
+
             </main>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
@@ -34,6 +61,7 @@
                 api v 0.9.0
             </div>
         </footer>
-        <script src="./dorsal-get.js" async defer></script>
+        <script src="./dorsal.js" async defer></script>
+        <script src="./app.js" async defer></script>
     </body>
 </html>

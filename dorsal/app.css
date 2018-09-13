@@ -7,24 +7,88 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
     background:url(/dorsal/assets/pexels-photo-932638.jpeg) top/cover no-repeat border-box,
     rgb(43, 39, 39) top;
     background-attachment: fixed;
     width: 100%;
     height: 100%;
+    color: white;
 }
 
-.icon-medium {
-    width: 50px;
 
+.backdrop {
+    display: none;
+    position: fixed;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    z-index: 90;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.header {
+
+.hide-element {
+    display: none !important ;
+}
+
+
+.show-element {
+    display: block !important ;
+}
+
+.click-area {
+    visibility: visible;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+    width: inherit;
+    height: inherit;
+    background: rgba(0,0,0,0.8);
+}
+
+
+
+.main__header {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
     z-index: 3;
     width: 100%;
-    height: 100px;
+    height: 60px;
+    margin-bottom: 20px;
+    background-color: rgba(0,0,0,0.2)
+}
+
+.main__header > .back-button {
+    display: none;
+}
+
+.toggle-button {
+    width: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 10px;
+    vertical-align: middle;
+    height: 50px;
+}
+
+.toggle-button:focus {
+    outline: none;
+}
+
+.toggle-button__bar {
+    width: 100%;
+    height: 0.1rem;
+    background: dodgerBlue;
+    display: block;
+    margin: 0.6rem 0;
 }
 
 .app-name {
@@ -33,35 +97,181 @@ body {
     flex: 2;
 }
 
+.main-nav {
+    display: flex;
+    vertical-align: middle;
+}
 
-.main__display-container > .sidebar{
+.main-nav__items {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
     display: none;
+}
+
+.main-nav__item {
+    margin: 0px 1rem;
+}
+
+.icon-medium {
+    width: 50px;
 
 }
 
-.main__display-container > div {
+.mobile-nav {
+    display: none;
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 50%;
+    height: 100vh;
+    color: white;
+}
+
+.mobile-nav h1 {
+    margin:20px;
+}
+
+.mobile-nav__items {
+    width: 90%;
+    height: 100%;
+    list-style: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px auto;
+    padding: 20px 0px;
+    background: dodgerBlue;
+    color: white;
+}
+
+.mobile-nav__item {
+    margin: 1rem 0;
+}
+
+.mobile-nav__item a {
+    font-size: 1.1rem;
+}
+
+.main-nav__item a,
+.mobile-nav__item a {
+    color: #0e4f4f;
+    text-decoration: none;
+    padding: 0.125rem 0px;
+}
+
+.main-nav__item a:hover,
+.main-nav__item a:active {
+    color: white;
+    border-bottom: 5px solid white;
+}
+
+.main-nav__item--cta a,
+.mobile-nav__item--cta a {
+    color: white;
+    background: #ff1b68;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+.main-nav__item--cta a:hover,
+.main-nav__item--cta a:active,
+.mobile-nav__item--cta a:hover,
+.mobile-nav__item--cta a:active {
+    color: #ff1b68;
+    background: white;
+    border: none;
+}
+
+.main__display-container > main__content {
+    position: relative;
     display: flex;
     z-index: 2;
     margin: auto;
 }
 
-.button {
-    margin: 20px auto;
-    padding: 20px;
-    width: 350px;
-    background: rgba(30, 143, 255, 0.618);
+.main__display-container > .main__welcome-message {
+    text-align: center;
+    display: flex;
+    height: 50vh;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto auto;
+}
+
+.main__display-container > .main__welcome-message  div {
+    margin: 20px;
+}
+
+.main__display-container > .main__welcome-message > .icon-large {
+    font-size: 8rem;
+    color: dodgerblue;
+}
+
+.main__display-container > .main__welcome-message > .icon-large:hover {
     color: white;
 }
 
-.overlay {
-    visibility: visible;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    z-index: -1;
-    width: inherit;
-    height: inherit;
-    background: rgba(0,0,0,0.5);
+
+
+.main__content > .mobile-content {
+    display: block;
+}
+
+.main__content-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    width:100%;
+    z-index: 2;
+}
+
+.main__content-panel-title {
+    color: white;
+}
+
+.main__content-panel > .live-data {
+    width : 98%
+}
+
+.main__content-panel > .live-data > .report-container {
+    padding: 10px;
+    border-bottom: 1px solid rgb(43, 43, 43);
+    margin: 10px;
+}
+
+.main__content-panel > .live-data > .report-container > .report-data-link {
+    color: dodgerblue;
+}
+
+
+.main__content-panel > .live-data > .report-container > .report-info {
+    margin: 20px;
+    color: white;
+    width : 90%;
+}
+
+.button {
+    margin: 20px auto;
+    padding: 20px;
+    width: 300px;
+    color: white;
+}
+
+.blue {
+    background: rgba(30, 143, 255, 0.618);
+}
+
+.orange {
+    background: rgb(235, 98, 8);
+}
+
+.green {
+    background: rgb(82, 204, 52);
 }
 
 .footer {
@@ -74,18 +284,35 @@ body {
     align-items: center;
     width: 100%;
     height: 50px;
+    z-index: -1;
 }
 
 .footer > div {
+    position: relative;
+    z-index: -1;
     text-align: center;
     color: white;
     font-size: 0.7rem;
 }
 
 
+h1 {
+    color: white;
+}
+
+
+/* ipads and larger */
 @media (min-width: 40rem) {
 
-    .header {
+    body {
+        font-size: 1rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .main__header  {
         display: flex;
         justify-content: flex-start;
         z-index: 3;
@@ -93,47 +320,71 @@ body {
         height: 100px;
     }
 
-    .header > .app-name {
+    .main__header  > .main-header__brand {
         margin: 20px;
         color: white;
         flex: 2;
     }
 
-    .main__display-container{
+    .main__header > .toggle-button {
+        display: none;
+    }
+
+    .main-nav {
+        display: flex;
+        vertical-align: middle;
+    }
+
+    .main-nav__items {
+        display: block;
+    }
+
+    .main__header  > .main-nav__items {
+        display: block;
+    }
+
+    .main__content{
         height: 300px;
         width: 100vw;
         padding: 20px;
         display: flex;
         justify-content: start;
+        color: white;
     }
 
-    .main__display-container > .sidebar {
+
+    .main__content > .sidebar {
         display: flex;
         flex-direction: column;
-        justify-content :start;
+        justify-content : center;
         align-content: center;
         margin-left: 50px;
     }
 
-    .main__display-container > .main__content-panel {
-        flex: 2;
-        color: white;
+    .main__content > .main__content-panel {
+        width: 100%;
+    }
+
+    .main__content-panel  > .live-data {
+        margin-top: 100px;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-content: center;
+        width: 50%;
     }
 
-    .main__display-container >  .main__content-panel-list-data {
-
-        background: rgba(80, 80, 80, 0.8);
-        width : 50%;
-        height: 50vh;
+    .main__content-panel > .live-data > h1 {
+        text-align: center;
     }
+
+    .main__content-panel > .live-data > .report-container {
+        background-color: rgba(0,0,0,0.2);
+    }
+
     .button {
-        margin: 5px  auto;
+        margin: 10px  auto;
         padding: 20px;
         width: 180px;
-        background: rgba(30, 143, 255, 0.618);
         color: white;
         cursor: pointer;
     }
@@ -141,12 +392,4 @@ body {
 
         cursor: pointer;
     }
-
-    .button[disabled]{
-        color: rgba(30, 143, 255, 0.8);
-        background: rgba(30, 143, 255, 0.1);
-        cursor: default;
-    }
-
-
 }
