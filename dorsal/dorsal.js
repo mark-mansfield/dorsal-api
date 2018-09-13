@@ -36,6 +36,7 @@ const countries = {
             div.setAttribute('value' , item.name)
             div.textContent = item.name
             div.addEventListener('click' , (e) => {
+                targetContainer.classList.add('hide-element')
                 countries.setCountry(item.name)
                 states.getStatesData(item.name)
             })
@@ -160,7 +161,16 @@ const zones = {
         title.setAttribute('class', 'title')
         title.textContent = "Reporting Zones in " + sharkData[0].state
 
+        const backButton = document.createElement('div')
+        backButton.setAttribute('class' ,'far fa-arrow-alt-circle-left icon-large')
+        backButton.addEventListener('click' , () => {
+            // functionality hook
+            navObject.statesView(sharkData[0].country)
+        })
+
         liveData.appendChild(title)
+        liveData.appendChild(backButton)
+        // liveData.appendChild(backButton)
         targetContainer.appendChild(liveData)
 
         data.forEach( (item) => {
@@ -220,9 +230,17 @@ const locations = {
 
         const title = document.createElement('h1')
         title.setAttribute('class', 'title')
-        title.textContent = "Reporting zones  " + sharkData[0].zone + ' / '+ sharkData[0].state
+        title.textContent = "Reporting locations  " + sharkData[0].zone + ' / '+ sharkData[0].state
+
+        const backButton = document.createElement('div')
+        backButton.setAttribute('class' ,'far fa-arrow-alt-circle-left icon-large')
+        backButton.addEventListener('click' , () => {
+            // functionality hook
+            navObject.zonesView()
+        })
 
         liveData.appendChild(title)
+        liveData.appendChild(backButton)
         targetContainer.appendChild(liveData)
 
         data.forEach( (item) => {
@@ -304,15 +322,13 @@ const locations = {
         const liveData = document.createElement('div')
         liveData.setAttribute('class', 'live-data')
 
-        const backButton = document.createElement('button')
-        backButton.setAttribute('class' ,'button green')
-
+        const backButton = document.createElement('div')
+        backButton.setAttribute('class' ,'far fa-arrow-alt-circle-left icon-large')
         backButton.addEventListener('click' , () => {
 
             // functionality hook
             navObject.locationsView(sharkData[0].zone)
         })
-
 
         const title = document.createElement('h1')
         title.setAttribute('class', 'title')

@@ -4,9 +4,12 @@ const navObject = {
     locationsView : function (zone) {
         locations.getLocationsData(zone)
     },
-    zoneView : function () {
+    zonesView : function () {
         zones.getZonesData()
     },
+    statesView: function (country) {
+        states.getStatesData(country)
+    }
 
 }
 const setUp = () => {

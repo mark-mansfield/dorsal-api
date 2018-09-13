@@ -375,6 +375,16 @@ h1 {
         text-align: center;
     }
 
+    .main__content-panel  > .live-data > .icon-large {
+        font-size: 2rem;
+        color: dodgerblue;
+    }
+
+    .main__content-panel  > .live-data > .icon-large:hover {
+        font-size: 2rem;
+        color: white;
+    }
+
     .main__content-panel > .live-data > .report-container {
         background-color: rgba(0,0,0,0.2);
     }
